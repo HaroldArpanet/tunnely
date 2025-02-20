@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  tunnely:
+    image: ${TUNNELY_IMAGE}
+    restart: always
+    environment:
+      - TARGET_IP=${TARGET_IP}
+      - TARGET_PORT=${TARGET_PORT}
+      - SOCKS_PORT=${SOCKS_PORT}
+      - SSH_KEY_PATH=/keys/id_rsa
+    volumes:
+      - ./ssh-keys:/keys:ro
+    ports:
+      - "${SOCKS_PORT}:${SOCKS_PORT}"
+
+networks:
+  default:
+    external: true
+    name: '${TUNNELY_NETWORK}'
