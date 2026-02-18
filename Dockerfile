@@ -3,7 +3,7 @@ FROM alpine:3.20.1
 
 # packages
 RUN apk update && \
-    apk add --no-cache openssh-client openssh-server socat
+    apk add --no-cache openssh-client openssh-server socat curl privoxy jq figlet
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

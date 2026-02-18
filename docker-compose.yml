@@ -6,13 +6,18 @@ services:
     restart: always
     environment:
       - TARGET_IP=${TARGET_IP}
-      - TARGET_PORT=${TARGET_PORT}
-      - SOCKS_PORT=${SOCKS_PORT}
+      - TARGET_PORT=${TARGET_PORT:-22}
+      - SOCKS_PORT=${SOCKS_PORT:-1080}
+      - HTTP_PROXY_PORT=${HTTP_PROXY_PORT:-8118}
+      - CHECK_URL=${CHECK_URL:-https://api.ipify.org?format=json}
+      - CHECK_INTERVAL=${CHECK_INTERVAL:-30}
+      - CHECK_TIMEOUT=${CHECK_TIMEOUT:-10}
       - SSH_KEY_PATH=/keys/id_rsa
     volumes:
       - ./ssh-keys:/keys:ro
     ports:
-      - "${SOCKS_PORT}:${SOCKS_PORT}"
+      - "${SOCKS_PORT:-1080}:${SOCKS_PORT:-1080}"
+      - "${HTTP_PROXY_PORT:-8118}:${HTTP_PROXY_PORT:-8118}"
 
 networks:
   default:
