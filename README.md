@@ -20,5 +20,10 @@ A lightweight Docker service that keeps an SSH SOCKS tunnel alive and exposes bo
 - `CHECK_INTERVAL` (default `30`): health-check interval in seconds
 - `CHECK_TIMEOUT` (default `10`): health-check request timeout in seconds
 
+## Quick start
+1. Copy `.env.example` to `.env` and adjust values.
+2. Place your SSH private key at `./ssh-keys/id_rsa`.
+3. Start the service with `docker compose up -d --build`.
+
 ## Notes
 - Mount your SSH private key into `./ssh-keys/id_rsa` (read-only in container).
