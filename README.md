@@ -25,5 +25,16 @@ A lightweight Docker service that keeps an SSH SOCKS tunnel alive and exposes bo
 2. Place your SSH private key at `./ssh-keys/id_rsa`.
 3. Start the service with `docker compose up -d --build`.
 
+## Security (local-only access)
+If your server has no firewall, publish proxy ports only on localhost so external users cannot connect:
+
+```yaml
+ports:
+  - "127.0.0.1:${SOCKS_PORT:-1080}:${SOCKS_PORT:-1080}"
+  - "127.0.0.1:${HTTP_PROXY_PORT:-8118}:${HTTP_PROXY_PORT:-8118}"
+```
+
+This allows access only from the same server.
+
 ## Notes
 - Mount your SSH private key into `./ssh-keys/id_rsa` (read-only in container).
